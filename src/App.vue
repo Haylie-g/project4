@@ -5,7 +5,7 @@ import Balance from './components/Balance.vue';
 import GroceryList from './components/GroceryList.vue';
 import TransactionList from './components/TransactionList.vue';
 
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted} from 'vue';
 const groceries = ref([]);
 const budget = ref(150);
 
@@ -37,6 +37,17 @@ const handleDeleteGrocery = (id) => {
 const generateID = () => {
   return Math.floor(Math.random() * 10000000);
 };
+
+const saveToLocalStorage = () => {
+  localStorage.setItem('groceries', JSON.stringify(groceries.value));
+};
+
+onMounted(() => {
+  const savedGroceries = JSON.parse(localStorage.getItem('groceries'));
+  if (savedGroceries) {
+    groceries.value = savedGroceries;
+  }
+});
 
 
 </script>
