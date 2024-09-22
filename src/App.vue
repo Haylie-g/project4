@@ -2,6 +2,7 @@
 import Header from './components/Header.vue';
 import AddGrocery from './components/AddGrocery.vue';
 import Balance from './components/Balance.vue';
+import GroceryList from './components/GroceryList.vue';
 
 import { ref, computed } from 'vue';
 const groceries = ref([]);
@@ -34,8 +35,9 @@ const generateID = () => {
 
 <template>
   <Header></Header>
-  <AddGrocery></AddGrocery>
+  <AddGrocery @grocerySubmitted="handleGrocery" />
   <Balance :total="totalCost" :budget="budget" :remaining="remainingBudget" />
+  <GroceryList :groceries="groceries" />
 
 </template>
 
